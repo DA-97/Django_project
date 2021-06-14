@@ -62,13 +62,16 @@
         <!-- 이전페이지 -->
         {% if question_list.has_previous %}
         <li class="page-item">
-            <a class="page-link" data-page="{{ question_list.previous_page_number }}" href="#">처음으로</a>
+            <a class="page-link" data-page="1" href="#">처음으로..</a>
         </li>
         {% else %}
         <li class="page-item disabled">
             <a class="page-link" tabindex="-1" aria-disabled="true" href="#">첫페이지입니다.</a>
         </li>
         {% endif %}
+        
+
+        {% if question_list.has_previous %}
         <li class="page-item">
             <a class="page-link" data-page="{{ question_list.previous_page_number }}" href="#">이전</a>
         </li>
@@ -77,6 +80,7 @@
             <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
         </li>
         {% endif %}
+        
 
         <!-- 페이지리스트 -->
         {% for page_number in question_list.paginator.page_range %}
@@ -100,6 +104,16 @@
         {% else %}
         <li class="page-item disabled">
             <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+
+        {% if question_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="-1" href="#">끝으로..</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">끝페이지입니다.</a>
         </li>
         {% endif %}
     </ul>
