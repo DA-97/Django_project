@@ -8,11 +8,15 @@ class Question(models.Model):
     subject = models.CharField(max_length=200)
     content = models.TextField()
     create_date = models.DateTimeField()
+    image = models.ImageField(upload_to='images/',blank=True, null=True)
     voter = models.ManyToManyField(User, related_name='voter_question')
-
+    
     def __str__(self):
         return self.subject
 
+class Photo(models.Model):
+    post = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
 class Answer(models.Model):
     voter = models.ManyToManyField(User, related_name='voter_answer')

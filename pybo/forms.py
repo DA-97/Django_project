@@ -6,16 +6,12 @@ from .models import Question, Answer, Comment
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['subject', 'content']
+        fields = ['subject', 'content', 'image']
         labels = {
             'subject': '제목',
             'content': '내용',
+            'image' : '사진'
         }
-
-        # widgets = {
-        #     'subject': forms.TextInput(attrs={'class': 'form-control'}),
-        #     'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
-        # }
 
 class AnswerForm(forms.ModelForm):
     class Meta:

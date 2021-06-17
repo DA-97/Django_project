@@ -24,6 +24,9 @@
                     <div>{{ question.create_date }}</div>
                 </div>
             </div>
+            {% for photo in question.photo_set.all%}
+            <img src="{{photo.image.url}}" width="50%"><br>
+            {% endfor %}
             {% if request.user == question.author %}
             <div class="my-3">
                 <a href="{% url 'pybo:question_modify' question.id  %}"

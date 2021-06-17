@@ -4,7 +4,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from django.utils import timezone
 
 from ..forms import QuestionForm
-from ..models import Question
+from ..models import Question, Photo
 
 
 @login_required(login_url='common:login')
@@ -19,6 +19,16 @@ def question_create(request):
             question.author = request.user  # 추가한 속성 author 적용
             question.create_date = timezone.now()
             question.save()
+        # name 속성이 imgs인 input 태그로부터 받은 파일들을 반복문을 통해 하나씩 가져온다 
+        for img in request.FILES.getlist('imgs'):
+            # Photo 객체를 하나 생성한다.
+            photo = Photo()
+            # 외래키로 현재 생성한 Post의 기본키를 참조한다.
+            photo.post = question
+            # imgs로부터 가져온 이미지 파일 하나를 저장한다.
+            photo.image = img
+            # 데이터베이스에 저장
+            photo.save()
             return redirect('pybo:index')
     else:
         form = QuestionForm()
